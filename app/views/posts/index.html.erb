@@ -10,10 +10,10 @@
                   <p class="card-text"><%= post.description %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <%= link_to "View", post_path(post), class: "btn btn-sm btn-outline-secondary" %>
+                      <%= link_to "Edit", edit_post_path(post), class: "btn btn-sm btn-outline-secondary" %>
                     </div>
-                    <small class="text-muted">9 mins</small>
+                    <small class="text-muted"><%= post.created_at.strftime("%d %b. %Y at %H:%M") %></small>
                   </div>
                 </div>
               </div>
