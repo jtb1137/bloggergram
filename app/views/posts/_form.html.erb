@@ -1,5 +1,5 @@
-<%= form_for @post do |f| %>
-    Title: <%= f.text_field :title %><br />
-    Description: <%= f.text_area :description %><br />
-    <%= f.submit %>
+<%= bootstrap_form_for @post do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :description %>
+    <%= f.submit "Submit", class: "btn btn-success" %>
 <% end %>
