@@ -2,6 +2,10 @@
   <div class="container">
     <h1 class="display-3">Welcome to Bloggergram!</h1>
     <p class="lead">Create posts and comment on other posts! The future of social media!</p>
+    <p class="lead">=> Need to associate Comments and Posts with Users, so that the Username will be displayed (add a Username to Users).</p>
+    <p class="lead">=> Maybe add a "Like" or an "Upvote" system.</p>
+    <p class="lead">=> Potential Comment system expansion: Numbered, "Like" or an "Upvote" system, branching comments (comment on a comment) </p>
+    <p class="lead">=> Set constant height on each card?</p>
   </div>
 </div>
 <div class="album p-3 bg-light">
@@ -12,7 +16,7 @@
                 <%= image_tag post.image.url(:medium), class: "card-img-top" %>
                 <div class="card-body">
                   <strong><%= link_to post.title, post %></strong>
-                  <p class="card-text"><%= post.description %></p>
+                  <p class="card-text"><%= truncate(post.description, length: 65) %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <%= link_to "View", post_path(post), class: "btn btn-sm btn-outline-secondary" %>

@@ -1,25 +1,27 @@
-<div class="card py-3">
-  <%= image_tag @post.image.url, class: "card-img-top" %>
-  <div class="card-block p-2">
-    <h4 class="card-title"><%= @post.title %></h4>
-    <p class="card-text"><%= @post.description %></p>
-  </div>
-  <% if user_signed_in? %>
-    <div class="btn-group pl-2 pb-2">
-      <%= link_to "Edit", edit_post_path(@post), class: "btn btn-sm btn-outline-secondary" %>
-      <%= link_to "Delete", post_path(@post.id), method: :delete, class: "btn btn-sm btn-outline-secondary" %>
-    </div>
-  <% end %>
-  <ul class="list-group list-group-flush">
-    <% @post.comments.each do |comment| %>
-        <li class="list-group-item"><%= comment.comment %></li>
-    <% end %>
-  </ul>
-  <% if user_signed_in? %>
+<div class="container py-3">
+  <div class="card">
+    <%= image_tag @post.image.url, class: "card-img-top" %>
     <div class="card-block p-2">
-      <%= render 'comments/form' %>
+      <h4 class="card-title"><%= @post.title %></h4>
+      <p class="card-text"><%= @post.description %></p>
     </div>
-  <% else %>
-    <%= link_to "Sign In to Comment", new_user_session_path, class: "btn btn-sm btn-outline-secondary" %>
-  <% end %>
+    <% if user_signed_in? %>
+      <div class="btn-group pl-2 pb-2">
+        <%= link_to "Edit", edit_post_path(@post), class: "btn btn-sm btn-outline-secondary" %>
+        <%= link_to "Delete", post_path(@post.id), method: :delete, class: "btn btn-sm btn-outline-secondary" %>
+      </div>
+    <% end %>
+    <ul class="list-group list-group-flush">
+      <% @post.comments.each do |comment| %>
+          <li class="list-group-item"><%= comment.comment %></li>
+      <% end %>
+    </ul>
+    <% if user_signed_in? %>
+      <div class="card-block p-2">
+        <%= render 'comments/form' %>
+      </div>
+    <% else %>
+      <%= link_to "Sign In to Comment", new_user_session_path, class: "btn btn-sm btn-outline-secondary" %>
+    <% end %>
+  </div>
 </div>
