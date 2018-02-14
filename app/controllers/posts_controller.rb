@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
     def index
         @posts = Post.all
     end
@@ -47,7 +46,9 @@ class PostsController < ApplicationController
     def destroy
         if user_signed_in?
             @post = Post.find(params[:id])
+            @post.comments.destroy_all
             @post.destroy
+
             redirect_to root_path
         else
             redirect_to new_user_session_path
