@@ -1,4 +1,5 @@
-<%= bootstrap_form_for @post do |f| %>
+<%= bootstrap_form_for @post, html: { multipart: true } do |f| %>
+    <%= f.file_field :image %>
     <%= f.text_field :title %>
     <%= f.text_area :description %>
     <%= f.submit "Submit", class: "btn btn-success" %>

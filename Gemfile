@@ -41,7 +41,7 @@ gem 'jquery-rails'
 
 gem 'bootstrap_form', '~> 2.7'
 
-gem 'paperclip', '~> 5.2', '>= 5.2.1'
+gem "paperclip", "~> 5.2.1"
 
 
 group :development, :test do
