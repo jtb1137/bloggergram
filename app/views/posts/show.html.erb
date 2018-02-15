@@ -15,7 +15,9 @@
       <% @post.comments.each do |comment| %>
           <li class="list-group-item">
             <%= comment.comment %>
-            <%= link_to "Delete", [comment.post, comment], method: :delete, class: "btn btn-sm btn-outline-secondary pull-right" %>
+            <% if comment.user_id == current_user.id %>
+              <%= link_to "Delete", [comment.post, comment], method: :delete, class: "btn btn-sm btn-outline-secondary pull-right" %>
+            <% end %>
           </li>
       <% end %>
     </ul>
