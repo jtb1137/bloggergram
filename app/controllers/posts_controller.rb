@@ -1,20 +1,19 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
+    
     def index
         @posts = Post.all
     end
 
     def new
-        if user_signed_in?
-            @post = Post.new   
-        else
-            redirect_to new_user_session_path
-        end
+        @post = Post.new   
     end
 
     def create
         @post = Post.new(post_params)
         
-        if @post.save && user_signed_in?
+        if @post.save
             redirect_to post_path(@post)
         else
             render "new"
@@ -22,21 +21,15 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find(params[:id])
+
     end
 
     def edit
-        if user_signed_in?
-            @post = Post.find(params[:id])
-        else
-            redirect_to new_user_session_path
-        end
+
     end
 
     def update
-        @post = Post.find(params[:id])
-
-        if @post.update(post_params) && user_signed_in?
+        if @post.update(post_params)
             redirect_to post_path(@post)
         else
             render "edit"
@@ -44,19 +37,18 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        if user_signed_in?
-            @post = Post.find(params[:id])
-            @post.comments.destroy_all
-            @post.destroy
+        @post.comments.destroy_all
+        @post.destroy
 
-            redirect_to root_path
-        else
-            redirect_to new_user_session_path
-        end
+        redirect_to root_path
     end
 
     private
     def post_params
         params.require(:post).permit(:image, :title, :description)
+    end
+
+    def set_post
+        @post = Post.find(params[:id])
     end
 end
