@@ -1,0 +1,23 @@
+<div class="row">
+    <% @posts.each do |post| %>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <%= image_tag post.image.url(:medium), class: "card-img-top" %>
+                <div class="card-body">
+                    <strong><%= link_to post.title, post %></strong>
+                    <p class="card-text"><%= truncate(post.description, length: 65) %></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <%= link_to "View", post_path(post), class: "btn btn-sm btn-outline-secondary" %>
+                            <% if post.user.id == current_user.id %>
+                                <%= link_to "Edit", edit_post_path(post), class: "btn btn-sm btn-outline-secondary" %>
+                            <% end %>
+                        </div>
+                    <small class="text-muted"><%= post.user.username %> on <%= post.created_at.strftime("%d %b. %Y at %H:%M") %></small>
+                    </div>
+                </div>
+            <p>Number of comments and a link to show them</p>
+            </div> 
+        </div>
+    <% end %>
+</div>
