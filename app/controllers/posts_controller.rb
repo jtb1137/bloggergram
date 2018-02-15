@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_post, only: [:show, :edit, :update, :destroy]
-    
+
     def index
         @posts = Post.all
     end
@@ -12,10 +12,13 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        @post.user_id = current_user.id
         
         if @post.save
+            flash[:success] = "Post was made"
             redirect_to post_path(@post)
         else
+            flash[:alert] = "Post was not made"
             render "new"
         end
     end
