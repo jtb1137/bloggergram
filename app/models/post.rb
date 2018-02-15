@@ -4,7 +4,6 @@ class Post < ApplicationRecord
     validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
     validates_presence_of :image, :title, :description
     validates :title, length: { maximum: 100 }
-
-    has_many :comments
+    
     belongs_to :user
 end
