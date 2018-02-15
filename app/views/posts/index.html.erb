@@ -20,7 +20,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <%= link_to "View", post_path(post), class: "btn btn-sm btn-outline-secondary" %>
-                      <% if user_signed_in? %>
+                      <% if post.user.id == current_user.id %>
                         <%= link_to "Edit", edit_post_path(post), class: "btn btn-sm btn-outline-secondary" %>
                       <% end %>
                     </div>
