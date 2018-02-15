@@ -1,17 +1,30 @@
 class CommentsController < ApplicationController
-    before_action :set_post, only: [:index, :show]
-    before_action :set_comments, only: [:index, :show]
+    before_action :set_post, only: [:index, :new, :create, :show, :show]
 
     def index
+        @comments = @post.comments
+    end
+
+    def new
+        @comment = Comment.new
     end
 
     def create
-        @comment = @post.comments.build(comment_params)
+        @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
+        @comment.post_id = @post.id
+
+        if @comment.save
+            flash[:success] = "Comment was made"
+            redirect_to post_path(@post)
+        else
+            flash[:alert] = "Comment was not made"
+            render 'show'
+        end
     end
 
     def show
-        @comment = @comments.find(params[:id])
+        @comment = @comments.find(params[:post_id])
     end
 
     def delete
@@ -25,9 +38,5 @@ class CommentsController < ApplicationController
 
     def set_post
         @post = Post.find(params[:post_id])
-    end
-
-    def set_comments
-        @comments = @post.comments
     end
 end

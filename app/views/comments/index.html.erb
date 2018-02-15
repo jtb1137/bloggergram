@@ -1,1 +1,13 @@
 <!-- Render comments on post -->
+<div class="container py-3">
+    <h1>Comments on: <%= @post.title %></h1>
+    <ul class="list-group">
+        <% if @comments %>
+            <% @comments.each do |comment| %>
+                <li class="list-group-item"><%= comment.content %>: Truncate, add view/delete links </li>
+            <% end %>
+        <% else %>
+            <li class="list-group-item">There's nothing here</li>
+        <% end %>
+    </ul>
+</div>

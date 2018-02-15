@@ -1,4 +1,4 @@
-<div class="container py-3">
+<div class="container">
   <div class="card">
     <%= image_tag @post.image.url, class: "card-img-top" %>
     <div class="card-block p-2">
@@ -11,11 +11,17 @@
         <%= link_to "Delete", post_path(@post.id), method: :delete, class: "btn btn-sm btn-outline-secondary" %>
       <% end %>
     </div>
-    <ul class="list-group list-group-flush">
-      
-    </ul>
-    <div class="card-block p-2">
-
+    <div>
+      <p>Paginate and truncate comments</p>
+      <% @post.comments.each do |comment| %>
+        <li><%= comment.content %></li>
+      <% end %>  
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="2" id="comment"></textarea>
+      </div>
+      <%= link_to "New Comment", new_post_comment_path(@post, @comment) %>
+      <%= link_to "View All Comments", post_comments_path(@post) %>
     </div>
   </div>
 </div>
