@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_post, only: [:show, :edit, :update, :destroy]
+    before_action :secure_post, only: [:edit, :update, :destroy]
 
     def index
         @posts = Post.all
@@ -24,11 +25,9 @@ class PostsController < ApplicationController
     end
 
     def show
-
     end
 
     def edit
-
     end
 
     def update
@@ -53,5 +52,11 @@ class PostsController < ApplicationController
 
     def set_post
         @post = Post.find(params[:id])
+    end
+
+    def secure_post
+        unless current_user == @post.user
+            redirect_to root_path
+        end
     end
 end
